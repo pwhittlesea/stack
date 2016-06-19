@@ -52,7 +52,6 @@
 | internal_subnets | Comma separated list of internal subnet IDs. |
 | external_subnets | Comma separated list of external subnet IDs. |
 | iam_role | ECS Service IAM role. |
-| log_bucket_id | S3 bucket ID for ELB logs. |
 | domain_name | The internal domain name, e.g "stack.local". |
 | environment | The environment of the stack, e.g "prod". |
 | cluster | The default ECS cluster name. |
@@ -258,7 +257,6 @@
 | healthcheck | Healthcheck path | - | yes |
 | protocol | Protocol to use, HTTP or TCP | - | yes |
 | zone_id | Route53 zone ID to use for dns_name | - | yes |
-| log_bucket | S3 bucket name to write ELB logs into | - | yes |
 
 ## Outputs
 
@@ -403,7 +401,6 @@
 | port | The container host port | - | yes |
 | cluster | The cluster name or ARN | - | yes |
 | dns_name | The DNS name to use, e.g nginx | - | yes |
-| log_bucket | The S3 bucket ID to use for the ELB | - | yes |
 | healthcheck | Path to a healthcheck endpoint | `"/"` | no |
 | container_port | The container port | `3000` | no |
 | command | The raw json of the task command | `"[]"` | no |
@@ -512,7 +509,6 @@
 | security_groups | Comma separated list of security group IDs that will be passed to the ELB module | - | yes |
 | port | The container host port | - | yes |
 | cluster | The cluster name or ARN | - | yes |
-| log_bucket | The S3 bucket ID to use for the ELB | - | yes |
 | ssl_certificate_id | SSL Certificate ID to use | - | yes |
 | iam_role | IAM Role ARN to use | - | yes |
 | external_dns_name | The subdomain under which the ELB is exposed externally, defaults to the task name | `""` | no |

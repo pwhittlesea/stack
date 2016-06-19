@@ -40,10 +40,6 @@ variable "zone_id" {
   description = "Route53 zone ID to use for dns_name"
 }
 
-variable "log_bucket" {
-  description = "S3 bucket name to write ELB logs into"
-}
-
 /**
  * Resources.
  */
@@ -73,10 +69,6 @@ resource "aws_elb" "main" {
     timeout             = 5
     target              = "${var.protocol}:${var.port}${var.healthcheck}"
     interval            = 30
-  }
-
-  access_logs {
-    bucket = "${var.log_bucket}"
   }
 
   tags {

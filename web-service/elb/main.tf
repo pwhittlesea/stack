@@ -28,10 +28,6 @@ variable "healthcheck" {
   description = "Healthcheck path"
 }
 
-variable "log_bucket" {
-  description = "S3 bucket name to write ELB logs into"
-}
-
 variable "external_dns_name" {
   description = "The subdomain under which the ELB is exposed externally, defaults to the task name"
 }
@@ -88,10 +84,6 @@ resource "aws_elb" "main" {
     timeout             = 5
     target              = "HTTP:${var.port}${var.healthcheck}"
     interval            = 30
-  }
-
-  access_logs {
-    bucket = "${var.log_bucket}"
   }
 
   tags {

@@ -55,10 +55,6 @@ variable "dns_name" {
   description = "The DNS name to use, e.g nginx"
 }
 
-variable "log_bucket" {
-  description = "The S3 bucket ID to use for the ELB"
-}
-
 /**
  * Options.
  */
@@ -166,7 +162,6 @@ module "elb" {
   healthcheck     = "${var.healthcheck}"
   protocol        = "${var.protocol}"
   zone_id         = "${var.zone_id}"
-  log_bucket      = "${var.log_bucket}"
 }
 
 /**

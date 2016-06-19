@@ -236,11 +236,6 @@ output "iam_role" {
   value = "${module.iam_role.arn}"
 }
 
-// S3 bucket ID for ELB logs.
-output "log_bucket_id" {
-  value = "${module.s3_logs.id}"
-}
-
 // The internal domain name, e.g "stack.local".
 output "domain_name" {
   value = "${module.dns.name}"

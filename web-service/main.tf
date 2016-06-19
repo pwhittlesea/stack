@@ -51,10 +51,6 @@ variable "cluster" {
   description = "The cluster name or ARN"
 }
 
-variable "log_bucket" {
-  description = "The S3 bucket ID to use for the ELB"
-}
-
 variable "ssl_certificate_id" {
   description = "SSL Certificate ID to use"
 }
@@ -176,7 +172,6 @@ module "elb" {
   external_zone_id   = "${var.external_zone_id}"
   internal_zone_id   = "${var.internal_zone_id}"
   security_groups    = "${var.security_groups}"
-  log_bucket         = "${var.log_bucket}"
   ssl_certificate_id = "${var.ssl_certificate_id}"
 }
 
