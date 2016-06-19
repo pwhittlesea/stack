@@ -88,13 +88,7 @@ resource "aws_ecs_task_definition" "main" {
     "name": "${var.name}",
     "portMappings": ${var.ports},
     "entryPoint": ${var.entry_point},
-    "mountPoints": [],
-    "logConfiguration": {
-      "logDriver": "journald",
-      "options": {
-        "tag": "${var.name}"
-      }
-    }
+    "mountPoints": []
   }
 ]
 EOF
