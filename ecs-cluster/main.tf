@@ -114,6 +114,11 @@ variable "docker_auth_data" {
   default     = ""
 }
 
+variable "ami_start_command" {
+  description = "A custom command that can be run on all created cluster instances. This could be used to call a custom start script baked into the AMI. E.g. '/opt/start.sh'"
+  default     = "echo 'Startup Script Complete'"
+}
+
 resource "aws_security_group" "cluster" {
   name        = "${var.name}-ecs-cluster"
   vpc_id      = "${var.vpc_id}"
@@ -155,11 +160,12 @@ resource "template_file" "cloud_config" {
   template = "${file("${path.module}/files/cloud-config.yml.tpl")}"
 
   vars {
-    environment      = "${var.environment}"
-    name             = "${var.name}"
-    region           = "${var.region}"
-    docker_auth_type = "${var.docker_auth_type}"
-    docker_auth_data = "${var.docker_auth_data}"
+    environment       = "${var.environment}"
+    name              = "${var.name}"
+    region            = "${var.region}"
+    docker_auth_type  = "${var.docker_auth_type}"
+    docker_auth_data  = "${var.docker_auth_data}"
+    ami_start_command = "${var.ami_start_command}"
   }
 
   lifecycle {
