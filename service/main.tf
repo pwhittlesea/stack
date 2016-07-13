@@ -47,6 +47,11 @@ variable "port" {
   description = "The container host port"
 }
 
+variable "listen_port" {
+  description = "The load balancer listen port for the service (defaults to 80)"
+  default = 80
+}
+
 variable "cluster" {
   description = "The cluster name or ARN"
 }
@@ -155,6 +160,7 @@ module "elb" {
 
   name            = "${module.task.name}"
   port            = "${var.port}"
+  listen_port     = "${var.listen_port}"
   environment     = "${var.environment}"
   subnet_ids      = "${var.subnet_ids}"
   security_groups = "${var.security_groups}"
