@@ -45,6 +45,31 @@ variable "zone_id" {
   description = "Route53 zone ID to use for dns_name"
 }
 
+variable "idle_timeout" {
+  description = "ELB idle timeout, in seconds"
+  default = 30
+}
+
+variable "health_timeout" {
+  description = "Health check timeout, in seconds"
+  default = 5
+}
+
+variable "health_interval" {
+  description = "Health check interval, in seconds"
+  default = 30
+}
+
+variable "healthy_threshold" {
+  description = "Health check healthy threshold"
+  default = 2
+}
+
+variable "unhealthy_threshold" {
+  description = "Health check unhealthy threshold"
+  default = 2
+}
+
 /**
  * Resources.
  */
@@ -57,7 +82,7 @@ resource "aws_elb" "main" {
   subnets                   = ["${split(",", var.subnet_ids)}"]
   security_groups           = ["${split(",",var.security_groups)}"]
 
-  idle_timeout                = 30
+  idle_timeout                = "${var.idle_timeout}"
   connection_draining         = true
   connection_draining_timeout = 15
 
@@ -69,11 +94,11 @@ resource "aws_elb" "main" {
   }
 
   health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 5
+    healthy_threshold   = "${var.healthy_threshold}"
+    unhealthy_threshold = "${var.unhealthy_threshold}"
+    timeout             = "${var.health_timeout}"
     target              = "${var.protocol}:${var.port}${var.healthcheck}"
-    interval            = 30
+    interval            = "${var.health_interval}"
   }
 
   tags {
