@@ -37,6 +37,11 @@ variable "env_vars" {
   default     = "[]"
 } # [{ "name": name, "value": value }]
 
+variable "log_conf" {
+  description = "The raw json of the logging configuration"
+  default     = "{}"
+} # { "logDriver": "awslogs", "options": {} }
+
 variable "command" {
   description = "The raw json of the task command"
   default     = "[]"
@@ -88,6 +93,7 @@ resource "aws_ecs_task_definition" "main" {
     "name": "${var.name}",
     "portMappings": ${var.ports},
     "entryPoint": ${var.entry_point},
+    "logConfiguration": ${var.log_conf},
     "mountPoints": []
   }
 ]
