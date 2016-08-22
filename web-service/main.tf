@@ -35,6 +35,11 @@ variable "version" {
   default     = "latest"
 }
 
+variable "log_conf" {
+  description = "The raw json of the task logging configuration"
+  default     = "{}"
+}
+
 variable "subnet_ids" {
   description = "Comma separated list of subnet IDs that will be passed to the ELB module"
 }
@@ -148,6 +153,7 @@ module "task" {
   env_vars      = "${var.env_vars}"
   memory        = "${var.memory}"
   cpu           = "${var.cpu}"
+  log_conf      = "${var.log_conf}"
 
   ports = <<EOF
   [

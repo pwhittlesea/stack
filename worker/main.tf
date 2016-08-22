@@ -53,6 +53,11 @@ variable "env_vars" {
   default     = "[]"
 }
 
+variable "log_conf" {
+  description = "The raw json of the task logging configuration"
+  default     = "{}"
+}
+
 variable "desired_count" {
   description = "The desired count"
   default     = 1
@@ -93,4 +98,5 @@ module "task" {
   env_vars      = "${var.env_vars}"
   memory        = "${var.memory}"
   cpu           = "${var.cpu}"
+  log_conf      = "${var.log_conf}"
 }
